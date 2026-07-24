@@ -215,6 +215,21 @@ function Get-ActivePort {
     return $DEFAULT_PORT
 }
 
+
+function Start-WatcherBackground {
+    param([int]$PortNumber = $DEFAULT_PORT)
+    $existingWatcher = Get-CimInstance Win32_Process -Filter "Name='node.exe'" -ErrorAction SilentlyContinue |
+        Where-Object { $_.CommandLine -match "studio-controller\.mjs.*watch" }
+    if ($existingWatcher) {
+        Write-Host "[INFO] 监听器已在后台运行 (PID: $($existingWatcher.ProcessId))" -ForegroundColor Gray
+        return
+    }
+    $codexBin = Join-Path $env:TEMP "CodexSkinStudio\codex-cli.exe"
+    $watcherArgs = @($controllerPath, "watch", "--port", $PortNumber, "--state-file", $stateFile)
+    if (Test-Path $codexBin) { $watcherArgs += @("--codex-bin", $codexBin) }
+    Start-Process -FilePath "node" -ArgumentList $watcherArgs -WindowStyle Hidden
+    Write-Host "[INFO] 后台监听器已启动 (端口 $PortNumber)" -ForegroundColor Gray
+}
 function Invoke-Controller {
     param([string[]]$ControllerArgs)
     if (-not (Test-Path $controllerPath)) { throw "Controller not found: $controllerPath" }
@@ -338,6 +353,7 @@ function Invoke-Start {
             Write-Host "=== 皮肤注入成功！===" -ForegroundColor Green
             Write-Host "在 Codex 侧边栏底部找到「皮肤」按钮。" -ForegroundColor Yellow
             Write-Host ""
+            Start-WatcherBackground -PortNumber $port
         } else {
             Write-Error "注入失败: $($inject.error)"
         }
@@ -401,6 +417,7 @@ function Invoke-Launch {
             Write-Host "  点击即可换肤！" -ForegroundColor Yellow
             Write-Host "====================================" -ForegroundColor Green
             Write-Host ""
+            Start-WatcherBackground -PortNumber $port
         } else {
             Write-Error "注入失败: $($inject.error)"
         }
@@ -525,3 +542,4 @@ switch ($Command) {
     "uninstall"         { Invoke-Uninstall }
     "watch"             { Invoke-Watch }
 }
+

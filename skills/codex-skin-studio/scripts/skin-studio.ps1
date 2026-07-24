@@ -1,4 +1,4 @@
-﻿<#
+<#
     Codex Skin Studio - Windows PowerShell Management Script
     CDP-based skin injection for Codex desktop app.
     Supports ANY Codex startup method (direct launch, codex-plus-plus, etc.)
@@ -219,7 +219,7 @@ function Invoke-Controller {
     param([string[]]$ControllerArgs)
     if (-not (Test-Path $controllerPath)) { throw "Controller not found: $controllerPath" }
     if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw "Node.js required" }
-    $result = & node $controllerPath @ControllerArgs 2>$null
+    $result = & node $controllerPath @ControllerArgs 2>&1
     if ($LASTEXITCODE -ne 0) { throw "Controller exit code: $LASTEXITCODE" }
     return $result
 }
@@ -317,7 +317,7 @@ function Invoke-Start {
         $result = Invoke-Controller "probe" "--port" $port "--timeout-ms" "8000"
         $probe = $result | ConvertFrom-Json
         if (-not $probe.pass) { Write-Error "CDP 端口 $port 未就绪"; return }
-    } catch { Write-Error "无法连接 Codex。CDP 是否已启用？"; return }
+    } catch { Write-Error "无法连接 Codex: $_"; return }
     
     try {
         $statusResult = Invoke-Controller "status" "--port" $port "--timeout-ms" "8000"

@@ -1,0 +1,2845 @@
+:root {
+  --csss-image: none;
+  --csss-bg: #171817;
+  --csss-main: rgba(23, 24, 23, 0.78);
+  --csss-surface: rgba(35, 36, 34, 0.86);
+  --csss-surface-strong: rgba(29, 30, 29, 0.94);
+  --csss-sidebar: rgba(20, 21, 20, 0.82);
+  --csss-titlebar: rgba(22, 23, 22, 0.9);
+  --csss-right: rgba(27, 28, 27, 0.92);
+  --csss-bottom: rgba(27, 28, 27, 0.94);
+  --csss-input: rgba(31, 32, 30, 0.96);
+  --csss-elevated: rgba(36, 37, 35, 0.98);
+  --csss-text: #f3f2ed;
+  --csss-muted: #aaa9a2;
+  --csss-accent: #d3aa61;
+  --csss-accent-ink: #201a10;
+  --csss-accent-soft: rgba(211, 170, 97, 0.16);
+  --csss-accent-hover: rgba(211, 170, 97, 0.18);
+  --csss-selection: rgba(211, 170, 97, 0.24);
+  --csss-border: rgba(243, 242, 237, 0.14);
+  --csss-border-heavy: rgba(243, 242, 237, 0.24);
+  --csss-shadow: rgba(0, 0, 0, 0.42);
+  --csss-wash: rgba(23, 24, 23, 0.58);
+  --csss-art-opacity: 0.5;
+  --csss-art-blur: 0px;
+  --csss-art-width: 100vw;
+  --csss-art-height: 100vh;
+  --csss-art-backdrop-opacity: 0.18;
+  --csss-art-backdrop-blur: 24px;
+  --csss-position-x: 50%;
+  --csss-position-y: 50%;
+  --csss-sidebar-art-opacity: 0.42;
+  --csss-titlebar-art-opacity: 0.24;
+  --csss-theme-strength: 0.82;
+  --csss-nav-radius: 8px;
+  --csss-nav-height: 35px;
+  --csss-nav-icon-size: 25px;
+  --csss-nav-icon-radius: 7px;
+  --csss-nav-hover-shift: 2px;
+  --csss-nav-weight: 560;
+  --csss-nav-motif-opacity: 0;
+  --csss-control-radius: 8px;
+  --csss-control-hover-lift: 1px;
+  --csss-control-press-scale: 0.97;
+  --csss-card-radius: 13px;
+  --csss-card-border-strength: 58%;
+  --csss-card-elevation: 24%;
+  --csss-landing-headline-scale: 1.2;
+  --csss-landing-headline-size: 40px;
+  --csss-landing-emphasis: 0.78;
+  --csss-landing-mark-scale: 1.12;
+  --csss-landing-border-strength: 40%;
+  --csss-landing-stage-width: 968px;
+  --csss-landing-card-height: 135px;
+  --csss-landing-card-lift: 14px;
+  --csss-landing-hover-lift: 8px;
+  --csss-landing-shadow-y: 17px;
+  --csss-landing-shadow-blur: 46px;
+  --csss-landing-image-opacity: 0.27;
+  --csss-ornament-opacity: 0;
+  --csss-ornament-scale: 1;
+  --csss-stage-scale: 1;
+  --csss-stage-bleed: 0;
+  --csss-stage-word-opacity: 0.08;
+  --csss-stage-title-size: 112px;
+  --csss-stage-overscan: 18px;
+  --csss-stage-shift: 12px;
+  --csss-composer-radius: 17px;
+  --csss-composer-control-radius: 8px;
+  --csss-composer-border-strength: 68%;
+  --csss-composer-image-blend: 40%;
+  --csss-composer-cover: rgba(31, 32, 30, 0.78);
+  --csss-composer-border: rgba(211, 170, 97, 0.45);
+  --csss-field-radius: 8px;
+  --csss-overlay-radius: 13px;
+  --csss-design-duration: 190ms;
+  --csss-design-easing: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.csss-themed,
+html.csss-themed body {
+  background-color: var(--csss-bg) !important;
+  color: var(--csss-text);
+}
+
+html.csss-themed body {
+  position: relative;
+  isolation: isolate;
+}
+
+#csss-art-layer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--csss-bg);
+}
+
+html.csss-themed #csss-art-layer {
+  display: block;
+}
+
+#csss-art-layer > .csss-art-backdrop,
+#csss-art-layer > .csss-art-canvas,
+#csss-art-layer > .csss-art-video {
+  position: absolute;
+  pointer-events: none;
+}
+
+#csss-art-layer > .csss-art-backdrop,
+#csss-art-layer > .csss-art-canvas {
+  background-image: var(--csss-image);
+  background-position: var(--csss-position-x) var(--csss-position-y);
+  background-repeat: no-repeat;
+}
+
+#csss-art-layer > .csss-art-backdrop {
+  inset: -5%;
+  background-size: cover;
+  opacity: var(--csss-art-backdrop-opacity);
+  filter:
+    blur(var(--csss-art-backdrop-blur))
+    saturate(calc(0.82 + var(--csss-theme-strength) * 0.18))
+    var(--csss-art-treatment, brightness(1));
+  transform: scale(1.06);
+  transform-origin: center;
+}
+
+#csss-art-layer > .csss-art-canvas {
+  inset: 0;
+  z-index: 1;
+  background-size: var(--csss-art-width) var(--csss-art-height);
+  opacity: var(--csss-art-opacity);
+  filter:
+    blur(var(--csss-art-blur))
+    saturate(calc(0.92 + var(--csss-theme-strength) * 0.32))
+    contrast(calc(0.94 + var(--csss-theme-strength) * 0.12))
+    var(--csss-art-treatment, brightness(1));
+  transition: opacity 180ms linear;
+}
+
+#csss-art-layer > .csss-art-video {
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--csss-position-x) var(--csss-position-y);
+  opacity: 0;
+  filter:
+    blur(var(--csss-art-blur))
+    saturate(calc(0.92 + var(--csss-theme-strength) * 0.32))
+    contrast(calc(0.94 + var(--csss-theme-strength) * 0.12))
+    var(--csss-art-treatment, brightness(1));
+  transition: opacity 180ms linear;
+}
+
+html.csss-themed[data-csss-media="video"] #csss-art-layer[data-video-ready="true"] > .csss-art-video {
+  opacity: var(--csss-art-opacity);
+}
+
+html.csss-themed[data-csss-media="video"] #csss-art-layer[data-video-ready="true"] > .csss-art-canvas {
+  opacity: 0;
+}
+
+/* Skill designs may borrow colors for interface surfaces, but the selected
+   image/video stays colorimetrically faithful. User-controlled blur remains. */
+html.csss-themed[data-csss-design="skill"] #csss-art-layer > .csss-art-backdrop {
+  filter: blur(var(--csss-art-backdrop-blur)) !important;
+}
+
+html.csss-themed[data-csss-design="skill"] #csss-art-layer > :is(.csss-art-canvas, .csss-art-video) {
+  filter: blur(var(--csss-art-blur)) !important;
+}
+
+html.csss-themed[data-csss-design="skill"] #csss-art-layer::after {
+  background: transparent !important;
+}
+
+html.csss-themed[data-csss-design="skill"] aside.app-shell-left-panel::before,
+html.csss-themed[data-csss-design="skill"] header.app-header-tint::before,
+html.csss-themed[data-csss-design="skill"] .csss-open-landing-card::after {
+  filter: none !important;
+}
+
+#csss-art-layer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: var(--csss-flair-pattern, none);
+  background-size: var(--csss-flair-pattern-size, auto);
+  opacity: var(--csss-flair-pattern-opacity, 0);
+  pointer-events: none;
+}
+
+#csss-art-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(
+      90deg,
+      var(--csss-sidebar) 0 216px,
+      color-mix(in oklab, var(--csss-sidebar) 68%, transparent) 232px,
+      transparent 240px
+    ),
+    linear-gradient(180deg, var(--csss-titlebar) 0 46px, transparent 154px),
+    radial-gradient(
+      circle at var(--csss-position-x) var(--csss-position-y),
+      transparent 0 24%,
+      color-mix(in oklab, var(--csss-wash) 32%, transparent) 62%,
+      var(--csss-wash) 112%
+    );
+}
+
+html.csss-themed[data-csss-canvas="seamless"] #csss-art-layer::after {
+  background: radial-gradient(
+    circle at var(--csss-position-x) var(--csss-position-y),
+    transparent 0 24%,
+    color-mix(in oklab, var(--csss-wash) 24%, transparent) 66%,
+    var(--csss-wash) 124%
+  );
+}
+
+html.csss-themed main.main-surface {
+  background: var(--csss-main) !important;
+  color: var(--csss-text) !important;
+  box-shadow:
+    inset 1px 0 0 var(--csss-border),
+    inset 0 1px 0 color-mix(in oklab, var(--csss-accent) 14%, transparent);
+}
+
+/* Full-page workspaces (Pull Requests, Sites, …) fill their list and detail
+   columns with opaque bg-token-main-surface-primary panels nested inside the
+   main surface, which hide the theme artwork. Let the translucent main surface
+   and artwork show through them instead of an opaque plate. */
+html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"] {
+  background-color: transparent !important;
+}
+
+/* Sticky sub-headers inside those panels must still mask rows scrolling beneath
+   them, so give them a themed translucent backdrop with a blur rather than a
+   fully transparent surface. */
+html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"][class~="sticky"] {
+  background-color: var(--csss-titlebar) !important;
+  backdrop-filter: blur(12px) saturate(1.1);
+}
+
+/* The detail column of these workspaces is an <aside> nested in the main
+   surface, so the generic right-panel rule painted it with the heavier
+   --csss-right material — it read noticeably darker than the list column next
+   to it. Match the workspace tint (the ID in the base rule's :not() gives it
+   high specificity, so keep the extra qualifiers here). */
+html.csss-themed main.main-surface aside:not(.app-shell-left-panel):not(#csss-panel) {
+  background-color: transparent !important;
+}
+
+html.csss-themed header.app-header-tint {
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--csss-titlebar) !important;
+  border-bottom-color: var(--csss-border) !important;
+  box-shadow: 0 1px 0 var(--csss-border);
+}
+
+html.csss-themed header.app-header-tint::before {
+  content: "";
+  position: absolute;
+  inset: -24px 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--csss-image);
+  background-position: var(--csss-position-x) var(--csss-position-y);
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: var(--csss-titlebar-art-opacity);
+  filter: saturate(1.16);
+}
+
+html.csss-themed[data-csss-canvas="seamless"] header.app-header-tint::before,
+html.csss-themed[data-csss-canvas="seamless"] aside.app-shell-left-panel::before {
+  content: none;
+  display: none;
+}
+
+html.csss-themed aside.app-shell-left-panel {
+  position: relative;
+  isolation: isolate;
+  background: var(--csss-sidebar) !important;
+  color: var(--csss-text) !important;
+  border-right: 1px solid var(--csss-border-heavy);
+  box-shadow: none;
+}
+
+html.csss-themed aside.app-shell-left-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--csss-image);
+  background-position: var(--csss-position-x) var(--csss-position-y);
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: var(--csss-sidebar-art-opacity);
+  filter: saturate(calc(0.9 + var(--csss-theme-strength) * 0.34));
+}
+
+html.csss-themed aside.app-shell-left-panel::after {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.csss-themed aside.app-shell-left-panel :is(button, a) {
+  color: var(--csss-text) !important;
+}
+
+/* Codex 2026.07 moved sidebar labels onto nested token-colored nodes. Keep
+   semantic labels readable without recoloring the artwork or the icon glyphs. */
+html.csss-themed[data-csss-mode="dark"] aside.app-shell-left-panel .csss-open-nav-label,
+html.csss-themed[data-csss-mode="dark"] aside.app-shell-left-panel :is(button, a, [role="button"]) .text-fade-truncate,
+html.csss-themed[data-csss-mode="dark"] aside.app-shell-left-panel :is(button, a, [role="button"]) [class~="text-token-foreground"] {
+  color: var(--csss-text) !important;
+  opacity: 1 !important;
+}
+
+html.csss-themed[data-csss-mode="dark"] aside.app-shell-left-panel :is(
+  [class~="text-token-text-secondary"],
+  [class~="text-token-text-tertiary"]
+) {
+  color: var(--csss-muted) !important;
+}
+
+html.csss-themed aside.app-shell-left-panel svg {
+  color: currentColor !important;
+}
+
+html.csss-themed aside.app-shell-left-panel :is(button, a):hover,
+html.csss-themed aside.app-shell-left-panel [aria-current="page"],
+html.csss-themed aside.app-shell-left-panel [class~="bg-token-list-hover-background"] {
+  background: var(--csss-accent-hover) !important;
+}
+
+html.csss-themed .composer-surface-chrome,
+html.csss-themed [data-message-author-role],
+html.csss-themed article,
+html.csss-themed [role="dialog"],
+html.csss-themed [role="menu"] {
+  border-color: var(--csss-border) !important;
+}
+
+html.csss-themed .composer-surface-chrome {
+  background:
+    linear-gradient(var(--csss-input), var(--csss-input)),
+    var(--csss-image) var(--csss-position-x) var(--csss-position-y) / cover !important;
+  color: var(--csss-text) !important;
+  border: 1px solid var(--csss-border-heavy);
+  box-shadow:
+    0 22px 64px var(--csss-shadow),
+    0 0 0 1px color-mix(in oklab, var(--csss-accent) 8%, transparent);
+}
+
+html.csss-themed[data-csss-canvas="seamless"] .composer-surface-chrome {
+  background: var(--csss-input) !important;
+}
+
+html.csss-themed .ProseMirror {
+  color: var(--csss-text) !important;
+  caret-color: var(--csss-accent) !important;
+}
+
+html.csss-themed [role="main"] :is(article, [data-message-author-role]) {
+  background-color: color-mix(in oklab, var(--csss-surface) 82%, transparent);
+}
+
+html.csss-themed :is(
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"],
+  [data-radix-popper-content-wrapper] > *
+) {
+  background-color: var(--csss-elevated) !important;
+  color: var(--csss-text) !important;
+  border-color: var(--csss-border) !important;
+  box-shadow: 0 24px 72px var(--csss-shadow);
+  backdrop-filter: blur(22px) saturate(1.1);
+}
+
+html.csss-themed aside:not(.app-shell-left-panel):not(#csss-panel) {
+  background-color: var(--csss-right) !important;
+  color: var(--csss-text) !important;
+  border-color: var(--csss-border) !important;
+}
+
+html.csss-themed :is(input, textarea, select) {
+  accent-color: var(--csss-accent);
+  caret-color: var(--csss-accent);
+}
+
+html.csss-themed ::selection {
+  background: var(--csss-selection);
+  color: var(--csss-text);
+}
+
+html.csss-themed * {
+  scrollbar-color: color-mix(in oklab, var(--csss-accent) 28%, transparent) transparent;
+}
+
+html.csss-themed ::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--csss-accent) 28%, transparent);
+  border-radius: 999px;
+}
+
+html.csss-themed :focus-visible {
+  outline-color: var(--csss-accent) !important;
+}
+
+/* Open style: the image drives the interaction language, not only the canvas. */
+html.csss-themed[data-csss-style="open"] #csss-art-layer::after {
+  background:
+    linear-gradient(
+      90deg,
+      var(--csss-sidebar) 0 218px,
+      color-mix(in oklab, var(--csss-sidebar) 68%, transparent) 234px,
+      transparent 240px
+    ),
+    linear-gradient(180deg, var(--csss-titlebar) 0 46px, transparent 116px),
+    radial-gradient(
+      circle at var(--csss-position-x) var(--csss-position-y),
+      transparent 0 42%,
+      color-mix(in oklab, var(--csss-wash) 22%, transparent) 72%,
+      var(--csss-wash) 128%
+  );
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-canvas="seamless"] #csss-art-layer::after {
+  background: radial-gradient(
+    circle at var(--csss-position-x) var(--csss-position-y),
+    transparent 0 42%,
+    color-mix(in oklab, var(--csss-wash) 16%, transparent) 76%,
+    var(--csss-wash) 132%
+  );
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel {
+  border-right-color: color-mix(in oklab, var(--csss-accent) 32%, var(--csss-border));
+  box-shadow: inset -1px 0 0 color-mix(in oklab, var(--csss-accent) 18%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel button[class~="w-full"] {
+  min-height: var(--csss-nav-height);
+  padding-inline: 7px !important;
+  border: 1px solid transparent;
+  border-radius: var(--csss-nav-radius) !important;
+  font-weight: var(--csss-nav-weight);
+  transition:
+    transform var(--csss-design-duration) var(--csss-design-easing),
+    background-color var(--csss-design-duration) ease-out,
+    border-color var(--csss-design-duration) ease-out,
+    box-shadow var(--csss-design-duration) ease-out;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel .csss-open-nav-row {
+  min-height: var(--csss-nav-height) !important;
+  padding-inline: 7px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--csss-nav-radius) !important;
+  font-weight: var(--csss-nav-weight) !important;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel button[class~="w-full"] > div:first-child > span:first-child {
+  width: var(--csss-nav-icon-size) !important;
+  height: var(--csss-nav-icon-size);
+  display: inline-grid !important;
+  place-items: center;
+  flex: 0 0 var(--csss-nav-icon-size);
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 20%, var(--csss-border));
+  border-radius: var(--csss-nav-icon-radius);
+  background: var(--csss-accent-soft);
+  color: var(--csss-accent) !important;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-text);
+  width: var(--csss-nav-icon-size) !important;
+  height: var(--csss-nav-icon-size) !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  flex: 0 0 var(--csss-nav-icon-size) !important;
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 22%, var(--csss-border)) !important;
+  border-radius: var(--csss-nav-icon-radius) !important;
+  background: var(--csss-accent-soft) !important;
+  color: var(--csss-accent) !important;
+  position: relative;
+  isolation: isolate;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel .csss-open-nav-icon svg {
+  position: relative;
+  z-index: 3;
+  color: var(--csss-nav-glyph) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel .csss-open-nav-icon::before,
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel .csss-open-nav-icon::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--csss-accent);
+  opacity: var(--csss-nav-motif-opacity);
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel button[class~="w-full"]:hover {
+  transform: translateX(var(--csss-nav-hover-shift));
+  border-color: color-mix(in oklab, var(--csss-accent) 26%, var(--csss-border));
+  background: color-mix(in oklab, var(--csss-accent-hover) 86%, var(--csss-surface)) !important;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel .csss-open-nav-row:hover {
+  transform: translateX(var(--csss-nav-hover-shift));
+  border-color: color-mix(in oklab, var(--csss-accent) 32%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-accent-hover) 86%, var(--csss-surface)) !important;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-accent);
+  border-color: color-mix(in oklab, var(--csss-accent) 34%, var(--csss-accent-ink)) !important;
+  background: var(--csss-accent-ink) !important;
+  color: var(--csss-accent) !important;
+}
+
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) .csss-open-nav-icon svg {
+  color: var(--csss-accent) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="solid"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) {
+  background: var(--csss-accent) !important;
+  color: var(--csss-accent-ink) !important;
+  border-color: color-mix(in oklab, var(--csss-accent-ink) 18%, var(--csss-accent));
+  box-shadow:
+    0 9px 24px color-mix(in oklab, var(--csss-accent) 24%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--csss-accent-ink) 12%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="solid"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) * {
+  color: inherit !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="solid"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) > div:first-child > span:first-child {
+  border-color: color-mix(in oklab, var(--csss-accent) 28%, var(--csss-accent-ink)) !important;
+  background: var(--csss-accent-ink) !important;
+  color: var(--csss-accent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="solid"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) .csss-open-nav-icon,
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="solid"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) .csss-open-nav-icon svg {
+  background: var(--csss-accent-ink) !important;
+  color: var(--csss-accent) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="tint"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) {
+  border-color: color-mix(in oklab, var(--csss-accent) 42%, var(--csss-border)) !important;
+  background: var(--csss-accent-soft) !important;
+  color: var(--csss-text) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="outline"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) {
+  border-color: var(--csss-accent) !important;
+  background: color-mix(in oklab, var(--csss-surface) 72%, transparent) !important;
+  color: var(--csss-accent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="edge"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) {
+  border-color: transparent !important;
+  background: color-mix(in oklab, var(--csss-accent-soft) 72%, transparent) !important;
+  color: var(--csss-text) !important;
+  box-shadow: inset 3px 0 0 var(--csss-accent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-style="quiet"] aside.app-shell-left-panel .csss-open-nav-icon {
+  border-color: transparent !important;
+  background: transparent !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-style="ribbon"] aside.app-shell-left-panel .csss-open-nav-row {
+  letter-spacing: 0.018em;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-style="pill"] aside.app-shell-left-panel :is(
+  .csss-open-nav-row,
+  button[class~="w-full"]
+) {
+  border-radius: calc(var(--csss-nav-height) / 2) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-style="pill"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-accent-ink);
+  border-color: color-mix(in oklab, var(--csss-accent) 58%, var(--csss-border)) !important;
+  border-radius: 50% !important;
+  background: var(--csss-accent) !important;
+  color: var(--csss-accent-ink) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-style="pill"] aside.app-shell-left-panel .csss-open-nav-icon svg {
+  color: var(--csss-accent-ink) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-style="blocks"] aside.app-shell-left-panel :is(
+  .csss-open-nav-row,
+  button[class~="w-full"]
+) {
+  border-radius: 0 !important;
+  border-color: color-mix(in oklab, var(--csss-accent) 30%, var(--csss-border)) !important;
+  letter-spacing: 0.045em;
+  box-shadow: inset 3px 0 0 color-mix(in oklab, var(--csss-accent) 62%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-style="blocks"] aside.app-shell-left-panel .csss-open-nav-icon {
+  border-radius: 0 !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-nav-active="glow"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) {
+  border-color: var(--csss-accent) !important;
+  background: color-mix(in oklab, var(--csss-accent-soft) 78%, transparent) !important;
+  color: var(--csss-text) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--csss-accent) 55%, transparent),
+    0 0 22px color-mix(in oklab, var(--csss-accent) 44%, transparent),
+    inset 0 0 14px color-mix(in oklab, var(--csss-accent) 18%, transparent);
+}
+
+/* Skill-selected icon language. Native SVGs stay visible and recognizable;
+ * the generated theme motif is a supporting layer, never a replacement. */
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="native"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-text);
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="outline"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-text);
+  border-color: color-mix(in oklab, var(--csss-accent) 48%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-surface) 58%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="duotone"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-text);
+  border-color: color-mix(in oklab, var(--csss-accent) 44%, var(--csss-border)) !important;
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--csss-accent) 32%, var(--csss-surface)) 0 48%,
+    color-mix(in oklab, var(--csss-accent-soft) 72%, var(--csss-surface-strong)) 48% 100%
+  ) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="glass"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-text);
+  border-color: color-mix(in oklab, white 28%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-surface) 34%, transparent) !important;
+  backdrop-filter: blur(9px) saturate(1.45);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, white 24%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="stamp"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-text);
+  border: 2px solid var(--csss-accent) !important;
+  background: color-mix(in oklab, var(--csss-surface-strong) 84%, transparent) !important;
+  box-shadow: 2px 2px 0 color-mix(in oklab, var(--csss-accent) 72%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="cutout"] aside.app-shell-left-panel .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-accent-ink);
+  border-color: var(--csss-accent) !important;
+  background: var(--csss-accent) !important;
+  color: var(--csss-accent-ink) !important;
+  box-shadow: 0 6px 16px color-mix(in oklab, var(--csss-accent) 24%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="cutout"] aside.app-shell-left-panel .csss-open-nav-icon svg {
+  color: var(--csss-nav-glyph) !important;
+}
+
+/* Treatment rules come after navigation-shape rules, so repeat the selected
+ * glyph decision here. A selected row always gets accent ink over the dark
+ * selection plate, regardless of its generated material combination. */
+html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) .csss-open-nav-icon {
+  --csss-nav-glyph: var(--csss-accent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="cutout"][data-csss-nav-active="solid"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) .csss-open-nav-icon,
+html.csss-themed[data-csss-style="open"][data-csss-icon-treatment="cutout"][data-csss-nav-active="solid"] aside.app-shell-left-panel button[class~="w-full"]:is(
+  [aria-current="page"],
+  [aria-pressed="true"],
+  [class~="bg-token-list-hover-background"]
+) .csss-open-nav-icon svg {
+  background: var(--csss-accent-ink) !important;
+  color: var(--csss-accent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="orbit"] aside.app-shell-left-panel .csss-open-nav-icon::before {
+  inset: 3px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  transform: rotate(var(--csss-nav-icon-turn));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="orbit"] aside.app-shell-left-panel .csss-open-nav-icon::after {
+  width: 4px;
+  height: 4px;
+  top: 2px;
+  right: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="spark"] aside.app-shell-left-panel .csss-open-nav-icon::before {
+  width: 9px;
+  height: 9px;
+  top: -3px;
+  right: -2px;
+  background: var(--csss-accent);
+  clip-path: polygon(50% 0, 61% 38%, 100% 50%, 61% 62%, 50% 100%, 39% 62%, 0 50%, 39% 38%);
+  transform: rotate(var(--csss-nav-icon-turn));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="wave"] aside.app-shell-left-panel .csss-open-nav-icon::before,
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="wave"] aside.app-shell-left-panel .csss-open-nav-icon::after {
+  width: 74%;
+  height: 42%;
+  left: 13%;
+  border-top: 1.5px solid currentColor;
+  border-radius: 50%;
+  transform: rotate(calc(var(--csss-nav-icon-turn) * 0.45));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="wave"] aside.app-shell-left-panel .csss-open-nav-icon::before { top: 4px; }
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="wave"] aside.app-shell-left-panel .csss-open-nav-icon::after { bottom: 1px; transform: rotate(calc(var(--csss-nav-icon-turn) * -0.45)); }
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="shard"] aside.app-shell-left-panel .csss-open-nav-icon::before {
+  inset: 1px;
+  background: color-mix(in oklab, var(--csss-accent) 42%, transparent);
+  clip-path: polygon(0 28%, 68% 0, 100% 34%, 72% 100%, 18% 82%);
+  transform: rotate(calc(var(--csss-nav-icon-turn) * 0.35));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="petal"] aside.app-shell-left-panel .csss-open-nav-icon::before {
+  inset: 2px;
+  background:
+    radial-gradient(ellipse at 50% 20%, currentColor 0 18%, transparent 20%),
+    radial-gradient(ellipse at 80% 50%, currentColor 0 18%, transparent 20%),
+    radial-gradient(ellipse at 50% 80%, currentColor 0 18%, transparent 20%),
+    radial-gradient(ellipse at 20% 50%, currentColor 0 18%, transparent 20%);
+  transform: rotate(var(--csss-nav-icon-turn));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="circuit"] aside.app-shell-left-panel .csss-open-nav-icon::before {
+  inset: 3px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 34% / 44% 1px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 68% / 42% 1px no-repeat,
+    linear-gradient(currentColor, currentColor) 34% 0 / 1px 42% no-repeat,
+    linear-gradient(currentColor, currentColor) 68% 100% / 1px 38% no-repeat;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-icon-motif="circuit"] aside.app-shell-left-panel .csss-open-nav-icon::after {
+  width: 4px;
+  height: 4px;
+  right: 2px;
+  bottom: 4px;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+}
+
+html.csss-themed[data-csss-style="open"] :is(
+  main.main-surface,
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"]
+) button[class*="border-token-border"] {
+  border-color: var(--csss-border) !important;
+  border-radius: var(--csss-control-radius) !important;
+  background-color: color-mix(in oklab, var(--csss-surface-strong) 78%, transparent) !important;
+  transition:
+    transform var(--csss-design-duration) var(--csss-design-easing),
+    background-color var(--csss-design-duration) ease-out,
+    border-color var(--csss-design-duration) ease-out;
+}
+
+html.csss-themed[data-csss-style="open"] :is(
+  main.main-surface,
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"]
+) button[class*="border-token-border"]:enabled:hover {
+  transform: translateY(calc(-1 * var(--csss-control-hover-lift)));
+  border-color: color-mix(in oklab, var(--csss-accent) 34%, var(--csss-border)) !important;
+  background-color: var(--csss-accent-hover) !important;
+}
+
+html.csss-themed[data-csss-style="open"] :is(
+  main.main-surface,
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"]
+) button:enabled:active {
+  transform: scale(var(--csss-control-press-scale));
+}
+
+html.csss-themed[data-csss-style="open"] :is(
+  main.main-surface,
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"]
+) button[class*="bg-token-button-background"] {
+  border-color: color-mix(in oklab, var(--csss-accent) 70%, var(--csss-border)) !important;
+  border-radius: var(--csss-control-radius) !important;
+  background: var(--csss-accent) !important;
+  color: var(--csss-accent-ink) !important;
+  box-shadow:
+    0 8px 22px color-mix(in oklab, var(--csss-accent) 22%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--csss-accent-ink) 10%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"] :is(
+  main.main-surface,
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"]
+) button[class*="bg-token-button-background"] * {
+  color: inherit !important;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-control {
+  border-color: color-mix(in oklab, var(--csss-accent) 20%, var(--csss-border)) !important;
+  border-radius: var(--csss-control-radius) !important;
+  background-color: color-mix(in oklab, var(--csss-surface-strong) 82%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-primary {
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 72%, var(--csss-border)) !important;
+  border-radius: var(--csss-control-radius) !important;
+  background: var(--csss-accent) !important;
+  color: var(--csss-accent-ink) !important;
+  box-shadow:
+    0 8px 22px color-mix(in oklab, var(--csss-accent) 24%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--csss-accent-ink) 12%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-primary * {
+  color: inherit !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-primary="outline"] .csss-open-primary {
+  border-color: var(--csss-accent) !important;
+  background: transparent !important;
+  color: var(--csss-accent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--csss-accent) 18%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-primary="soft"] .csss-open-primary {
+  border-color: color-mix(in oklab, var(--csss-accent) 38%, var(--csss-border)) !important;
+  background: var(--csss-accent-soft) !important;
+  color: var(--csss-accent) !important;
+  box-shadow: none !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-secondary="flat"] .csss-open-control:not(.csss-open-primary) {
+  border-color: transparent !important;
+  background: transparent !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-secondary="outline"] .csss-open-control:not(.csss-open-primary) {
+  border-color: color-mix(in oklab, var(--csss-accent) 34%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-surface-strong) 58%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-secondary="soft"] .csss-open-control:not(.csss-open-primary) {
+  border-color: transparent !important;
+  background: var(--csss-accent-soft) !important;
+  color: var(--csss-accent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-primary="gradient"] .csss-open-primary {
+  border-color: color-mix(in oklab, var(--csss-accent) 78%, var(--csss-border)) !important;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--csss-accent) 82%, white),
+    var(--csss-accent) 46%,
+    color-mix(in oklab, var(--csss-accent) 66%, black)
+  ) !important;
+  color: var(--csss-accent-ink) !important;
+  box-shadow:
+    0 10px 30px color-mix(in oklab, var(--csss-accent) 34%, transparent),
+    inset 0 1px 0 color-mix(in oklab, white 24%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-primary="glass"] .csss-open-primary {
+  border-color: color-mix(in oklab, var(--csss-accent) 55%, transparent) !important;
+  background: color-mix(in oklab, var(--csss-accent) 32%, transparent) !important;
+  color: var(--csss-text) !important;
+  backdrop-filter: blur(14px) saturate(1.5);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, white 26%, transparent),
+    0 8px 26px color-mix(in oklab, var(--csss-shadow) 60%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-secondary="glass"] .csss-open-control:not(.csss-open-primary) {
+  border-color: color-mix(in oklab, white 24%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-surface) 36%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(1.35);
+}
+
+html.csss-themed[data-csss-style="open"] main.main-surface [class*="border-token-border"][class*="rounded-"]:not(button) {
+  border-color: color-mix(in oklab, var(--csss-accent) 18%, var(--csss-border)) !important;
+  border-radius: var(--csss-card-radius) !important;
+}
+
+html.csss-themed[data-csss-style="open"] main.main-surface .csss-open-card {
+  border-color: color-mix(in oklab, var(--csss-accent) var(--csss-card-border-strength), var(--csss-border)) !important;
+  border-radius: var(--csss-card-radius) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-card="flat"] main.main-surface .csss-open-card {
+  background: color-mix(in oklab, var(--csss-surface) 86%, transparent) !important;
+  box-shadow: none !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-card="layered"] main.main-surface .csss-open-card {
+  background: var(--csss-surface-strong) !important;
+  box-shadow: 0 12px 34px color-mix(in oklab, var(--csss-shadow) var(--csss-card-elevation), transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-card="image-tint"] main.main-surface .csss-open-card {
+  background:
+    linear-gradient(
+      color-mix(in oklab, var(--csss-surface-strong) 82%, transparent),
+      color-mix(in oklab, var(--csss-surface) 90%, transparent)
+    ),
+    var(--csss-image) var(--csss-position-x) var(--csss-position-y) / cover !important;
+  box-shadow: 0 10px 28px color-mix(in oklab, var(--csss-shadow) var(--csss-card-elevation), transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-canvas="seamless"][data-csss-card="image-tint"] main.main-surface .csss-open-card {
+  background: color-mix(in oklab, var(--csss-accent-soft) 34%, var(--csss-surface-strong)) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-card="glass"] main.main-surface .csss-open-card {
+  border-color: color-mix(in oklab, white 26%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-surface-strong) 42%, transparent) !important;
+  backdrop-filter: blur(18px) saturate(1.35);
+  box-shadow:
+    0 18px 44px color-mix(in oklab, var(--csss-shadow) var(--csss-card-elevation), transparent),
+    inset 0 1px 0 color-mix(in oklab, white 20%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-card="poster"] main.main-surface .csss-open-card {
+  border-color: color-mix(in oklab, var(--csss-accent) 74%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-accent) 16%, var(--csss-surface-strong)) !important;
+  box-shadow:
+    inset 0 4px 0 var(--csss-accent),
+    0 14px 38px color-mix(in oklab, var(--csss-shadow) var(--csss-card-elevation), transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-composer {
+  border-radius: var(--csss-composer-radius) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-field {
+  border-radius: var(--csss-field-radius) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome {
+  border-color: var(--csss-composer-border) !important;
+  border-radius: var(--csss-composer-radius) !important;
+  background:
+    linear-gradient(var(--csss-composer-cover), var(--csss-composer-cover)),
+    var(--csss-image) var(--csss-position-x) var(--csss-position-y) / cover !important;
+  box-shadow:
+    0 24px 70px var(--csss-shadow),
+    0 0 0 1px color-mix(in oklab, var(--csss-accent) 16%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-canvas="seamless"] .composer-surface-chrome {
+  background: var(--csss-composer-cover) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button[class*="rounded-full"] {
+  border-radius: var(--csss-composer-control-radius) !important;
+}
+
+/* The right-most composer action is a semantic primary control. It must not
+   inherit Open's translucent secondary-control surface, especially while it
+   changes from Send to Stop during a running task. */
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-control.csss-open-composer-action:not(:disabled) {
+  border-color: color-mix(in oklab, var(--csss-text) 72%, var(--csss-border)) !important;
+  background: var(--csss-text) !important;
+  background-color: var(--csss-text) !important;
+  background-image: none !important;
+  color: var(--csss-bg) !important;
+  opacity: 1 !important;
+  box-shadow:
+    0 6px 18px color-mix(in oklab, var(--csss-shadow) 76%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--csss-bg) 10%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-composer-action:not(:disabled) :is(svg, path, rect, circle) {
+  color: inherit !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+
+/* Disabled send/stop action: without the enabled rule above it would keep only
+   the dark secondary surface, hiding its dark native glyph (an empty square).
+   Give it the same light fill and dark ink; the native opacity:0.5 still reads
+   as disabled. */
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-composer-action:disabled {
+  border-color: color-mix(in oklab, var(--csss-text) 60%, var(--csss-border)) !important;
+  background: var(--csss-text) !important;
+  background-color: var(--csss-text) !important;
+  background-image: none !important;
+  color: var(--csss-bg) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-composer-action:disabled :is(svg, path, rect, circle) {
+  color: var(--csss-bg) !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+
+/* Native solid-light chips (bg-token-foreground: light fill + dark ink, e.g. the
+   rate-limit "查看重置次数" action) must not inherit Open's dark secondary surface,
+   which would leave dark text on a dark plate. Restore a legible light fill with
+   dark ink. The composer send/stop action is handled by its own rules above. */
+html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) {
+  border-color: color-mix(in oklab, var(--csss-text) 68%, var(--csss-border)) !important;
+  background: var(--csss-text) !important;
+  background-color: var(--csss-text) !important;
+  background-image: none !important;
+  color: var(--csss-bg) !important;
+}
+
+html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) * {
+  color: inherit !important;
+}
+
+html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) :is(svg, path, rect, circle) {
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.csss-themed[data-csss-style="open"] :is(
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"],
+  [data-radix-popper-content-wrapper] > *
+) {
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 24%, var(--csss-border)) !important;
+  border-radius: var(--csss-overlay-radius) !important;
+  background: var(--csss-elevated) !important;
+  box-shadow:
+    0 24px 76px var(--csss-shadow),
+    inset 0 1px 0 color-mix(in oklab, var(--csss-accent) 10%, transparent);
+  backdrop-filter: none;
+}
+
+html.csss-themed[data-csss-style="open"] :is(input, textarea, select) {
+  border-radius: var(--csss-field-radius) !important;
+}
+
+/*
+ * Open landing stage. Runtime classes are attached only to Codex's semantic
+ * home hero and suggestion surface, so conversation and settings layouts keep
+ * their own hierarchy.
+ */
+html.csss-themed[data-csss-style="open"] .csss-open-landing-stage {
+  width: min(100%, var(--csss-landing-stage-width)) !important;
+  max-width: var(--csss-landing-stage-width) !important;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-stage > * {
+  position: relative;
+  z-index: 1;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-stage::before,
+html.csss-themed[data-csss-style="open"] .csss-open-landing-stage::after {
+  content: none;
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--csss-ornament-opacity);
+  transform: scale(var(--csss-ornament-scale));
+  transform-origin: center;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-hero {
+  width: 100%;
+  transition:
+    gap var(--csss-design-duration) var(--csss-design-easing),
+    transform var(--csss-design-duration) var(--csss-design-easing);
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-heading {
+  width: 100%;
+  max-width: 17ch;
+  justify-content: center !important;
+  color: var(--csss-text) !important;
+  font-size: clamp(
+    30px,
+    var(--csss-landing-headline-size),
+    64px
+  ) !important;
+  font-weight: 680 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.052em !important;
+  text-shadow:
+    0 2px 18px color-mix(in oklab, var(--csss-shadow) 76%, transparent),
+    0 1px 2px var(--csss-shadow);
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-mark {
+  color: var(--csss-accent) !important;
+  opacity: 0.94;
+  transform: scale(var(--csss-landing-mark-scale));
+  transform-origin: center;
+  transition:
+    color var(--csss-design-duration) ease-out,
+    transform var(--csss-design-duration) var(--csss-design-easing);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-layout="editorial"] .csss-open-landing-hero {
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: clamp(18px, 3vw, 34px) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-layout="editorial"] .csss-open-landing-heading {
+  max-width: 15ch;
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-layout="editorial"] .csss-open-landing-mark {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  flex: 0 0 58px;
+  place-items: center;
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 48%, var(--csss-border));
+  border-radius: max(10px, var(--csss-card-radius));
+  background: color-mix(in oklab, var(--csss-accent-soft) 88%, var(--csss-surface));
+  box-shadow:
+    0 14px 42px color-mix(in oklab, var(--csss-accent) 18%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--csss-text) 12%, transparent);
+  transform: rotate(-4deg);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-layout="poster-hero"] .csss-open-landing-hero {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: clamp(14px, 2vw, 24px) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-layout="poster-hero"] .csss-open-landing-heading {
+  max-width: 22ch;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  font-weight: 760 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.06em !important;
+  text-shadow:
+    0 3px 26px color-mix(in oklab, var(--csss-shadow) 85%, transparent),
+    0 1px 2px var(--csss-shadow);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-layout="poster-hero"] .csss-open-landing-mark {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  flex: 0 0 72px;
+  place-items: center;
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 60%, var(--csss-border));
+  border-radius: max(8px, var(--csss-card-radius));
+  background: var(--csss-accent);
+  color: var(--csss-accent-ink) !important;
+  box-shadow:
+    0 18px 52px color-mix(in oklab, var(--csss-accent) 34%, transparent),
+    inset 0 1px 0 color-mix(in oklab, white 18%, transparent);
+  transform: rotate(-6deg) scale(var(--csss-landing-mark-scale));
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-mark svg {
+  position: relative;
+  z-index: 1;
+  color: inherit !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-mark="medallion"] .csss-open-landing-mark {
+  border-radius: 50% !important;
+  border-color: color-mix(in oklab, var(--csss-accent) 60%, var(--csss-border)) !important;
+  background: radial-gradient(circle at 34% 28%, color-mix(in oklab, white 28%, var(--csss-accent)), var(--csss-accent) 58%, color-mix(in oklab, var(--csss-accent) 70%, black)) !important;
+  color: var(--csss-accent-ink) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-mark="portal"] .csss-open-landing-mark {
+  border-radius: 50% !important;
+  border: 2px solid color-mix(in oklab, var(--csss-accent) 82%, white) !important;
+  background: color-mix(in oklab, var(--csss-surface) 42%, transparent) !important;
+  color: var(--csss-accent) !important;
+  box-shadow:
+    0 0 0 7px color-mix(in oklab, var(--csss-accent) 13%, transparent),
+    0 0 34px color-mix(in oklab, var(--csss-accent) 42%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-mark="cutout"] .csss-open-landing-mark {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--csss-accent) !important;
+  color: var(--csss-accent-ink) !important;
+  clip-path: polygon(10% 0, 100% 0, 88% 82%, 48% 100%, 0 74%);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-mark="signal"] .csss-open-landing-mark {
+  border-width: 1px 5px 1px 1px !important;
+  border-color: color-mix(in oklab, var(--csss-accent) 72%, var(--csss-border)) !important;
+  border-radius: 4px 22px 22px 4px !important;
+  background: linear-gradient(90deg, var(--csss-accent-soft), color-mix(in oklab, var(--csss-surface) 48%, transparent)) !important;
+  color: var(--csss-accent) !important;
+}
+
+/* Home ornaments reuse the same theme motif as navigation. They live behind
+ * the hero and suggestions, avoid text, and never capture interaction. */
+html.csss-themed[data-csss-style="open"]:not([data-csss-ornament="none"]) .csss-open-landing-stage::before,
+html.csss-themed[data-csss-style="open"]:not([data-csss-ornament="none"]) .csss-open-landing-stage::after {
+  content: "";
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament-placement="corners"] .csss-open-landing-stage::before { top: -34px; right: -42px; }
+html.csss-themed[data-csss-style="open"][data-csss-ornament-placement="corners"] .csss-open-landing-stage::after { bottom: -30px; left: -38px; }
+html.csss-themed[data-csss-style="open"][data-csss-ornament-placement="edges"] .csss-open-landing-stage::before { top: 10%; right: -72px; }
+html.csss-themed[data-csss-style="open"][data-csss-ornament-placement="edges"] .csss-open-landing-stage::after { bottom: 8%; left: -68px; }
+html.csss-themed[data-csss-style="open"][data-csss-ornament-placement="halo"] .csss-open-landing-stage::before { top: -62px; left: calc(50% - 110px); }
+html.csss-themed[data-csss-style="open"][data-csss-ornament-placement="halo"] .csss-open-landing-stage::after { top: 42px; left: calc(50% - 72px); }
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="orbit"] .csss-open-landing-stage::before {
+  width: 220px;
+  height: 220px;
+  border: 2px solid color-mix(in oklab, var(--csss-accent) 76%, transparent);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 20px color-mix(in oklab, var(--csss-accent) 7%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="orbit"] .csss-open-landing-stage::after {
+  width: 142px;
+  height: 142px;
+  border: 1px dashed color-mix(in oklab, var(--csss-accent) 82%, transparent);
+  border-radius: 50%;
+  box-shadow: 54px -18px 0 -51px var(--csss-accent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="spark"] .csss-open-landing-stage::before,
+html.csss-themed[data-csss-style="open"][data-csss-ornament="spark"] .csss-open-landing-stage::after {
+  width: 150px;
+  height: 150px;
+  background: conic-gradient(from 12deg, transparent 0 8%, var(--csss-accent) 9% 12%, transparent 13% 24%, color-mix(in oklab, var(--csss-accent) 54%, transparent) 25% 29%, transparent 30% 100%);
+  clip-path: polygon(50% 0, 61% 38%, 100% 50%, 61% 62%, 50% 100%, 39% 62%, 0 50%, 39% 38%);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="wave"] .csss-open-landing-stage::before,
+html.csss-themed[data-csss-style="open"][data-csss-ornament="wave"] .csss-open-landing-stage::after {
+  width: 260px;
+  height: 110px;
+  border: 3px solid color-mix(in oklab, var(--csss-accent) 66%, transparent);
+  border-color: color-mix(in oklab, var(--csss-accent) 66%, transparent) transparent transparent transparent;
+  border-radius: 50%;
+  transform: rotate(-12deg) scale(var(--csss-ornament-scale));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="wave"] .csss-open-landing-stage::after {
+  transform: rotate(168deg) scale(var(--csss-ornament-scale));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="shard"] .csss-open-landing-stage::before,
+html.csss-themed[data-csss-style="open"][data-csss-ornament="shard"] .csss-open-landing-stage::after {
+  width: 190px;
+  height: 150px;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--csss-accent) 82%, transparent), color-mix(in oklab, var(--csss-accent) 8%, transparent));
+  clip-path: polygon(0 18%, 78% 0, 100% 54%, 58% 100%, 12% 76%);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="petal"] .csss-open-landing-stage::before,
+html.csss-themed[data-csss-style="open"][data-csss-ornament="petal"] .csss-open-landing-stage::after {
+  width: 180px;
+  height: 180px;
+  background:
+    radial-gradient(ellipse at 50% 14%, var(--csss-accent) 0 20%, transparent 21%),
+    radial-gradient(ellipse at 86% 50%, var(--csss-accent) 0 20%, transparent 21%),
+    radial-gradient(ellipse at 50% 86%, var(--csss-accent) 0 20%, transparent 21%),
+    radial-gradient(ellipse at 14% 50%, var(--csss-accent) 0 20%, transparent 21%);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-ornament="circuit"] .csss-open-landing-stage::before,
+html.csss-themed[data-csss-style="open"][data-csss-ornament="circuit"] .csss-open-landing-stage::after {
+  width: 230px;
+  height: 150px;
+  background:
+    radial-gradient(circle at 16% 28%, var(--csss-accent) 0 4px, transparent 5px),
+    radial-gradient(circle at 72% 70%, var(--csss-accent) 0 4px, transparent 5px),
+    linear-gradient(90deg, var(--csss-accent), var(--csss-accent)) 16% 28% / 56% 2px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 72% 28% / 2px 44% no-repeat,
+    linear-gradient(90deg, var(--csss-accent), var(--csss-accent)) 72% 70% / 24% 2px no-repeat;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-headline="gradient"] .csss-open-landing-heading {
+  background: linear-gradient(
+    92deg,
+    var(--csss-accent),
+    color-mix(in oklab, var(--csss-accent) 45%, var(--csss-text))
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-suggestions {
+  overflow: visible;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-grid {
+  counter-reset: csss-landing-card;
+  gap: clamp(11px, 1.2vw, 17px) !important;
+  overflow: visible;
+  padding-block: 8px calc(var(--csss-landing-card-lift) + 12px);
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card {
+  --csss-landing-offset: 0px;
+  position: relative;
+  isolation: isolate;
+  min-height: var(--csss-landing-card-height) !important;
+  overflow: hidden;
+  counter-increment: csss-landing-card;
+  padding: 16px 17px !important;
+  border: 1px solid color-mix(
+    in oklab,
+    var(--csss-accent) var(--csss-landing-border-strength),
+    var(--csss-border)
+  ) !important;
+  border-radius: var(--csss-card-radius) !important;
+  color: var(--csss-text) !important;
+  box-shadow:
+    inset 0 3px 0 color-mix(in oklab, var(--csss-accent) 68%, transparent),
+    0 var(--csss-landing-shadow-y) var(--csss-landing-shadow-blur)
+      color-mix(in oklab, var(--csss-shadow) 74%, transparent) !important;
+  transform: translateY(var(--csss-landing-offset));
+  transform-origin: center;
+  transition:
+    transform var(--csss-design-duration) var(--csss-design-easing),
+    border-color var(--csss-design-duration) ease-out,
+    box-shadow var(--csss-design-duration) ease-out,
+    background-color var(--csss-design-duration) ease-out;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card::before {
+  content: "0" counter(csss-landing-card);
+  position: absolute;
+  top: 13px;
+  right: 14px;
+  z-index: 2;
+  color: color-mix(in oklab, var(--csss-accent) 74%, var(--csss-muted));
+  font-size: 10px;
+  font-weight: 760;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--csss-image);
+  background-position: 0% var(--csss-position-y);
+  background-repeat: no-repeat;
+  background-size: 440% auto;
+  opacity: 0;
+  filter: saturate(1.18) contrast(1.08);
+  pointer-events: none;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card-2::after {
+  background-position-x: 33%;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card-3::after {
+  background-position-x: 66%;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card-4::after {
+  background-position-x: 100%;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card > span:first-child > span:first-child {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 36%, var(--csss-border));
+  border-radius: max(7px, min(var(--csss-card-radius), 10px));
+  background: color-mix(in oklab, var(--csss-accent-soft) 92%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card > span:last-child > span:first-child {
+  color: var(--csss-text) !important;
+  font-size: 15px !important;
+  font-weight: 680 !important;
+  line-height: 1.28 !important;
+  letter-spacing: -0.018em;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-card="solid"] .csss-open-landing-card {
+  background: var(--csss-surface-strong) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-card="tinted"] .csss-open-landing-card {
+  background: color-mix(in oklab, var(--csss-accent-soft) 62%, var(--csss-surface-strong)) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-card="image-strip"] .csss-open-landing-card {
+  background: color-mix(in oklab, var(--csss-surface-strong) 76%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-card="image-strip"] .csss-open-landing-card::after {
+  opacity: var(--csss-landing-image-opacity);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-canvas="seamless"][data-csss-landing-card="image-strip"] .csss-open-landing-card::after {
+  opacity: 0;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-card="poster"] .csss-open-landing-card {
+  border-color: color-mix(in oklab, var(--csss-accent) 70%, var(--csss-border)) !important;
+  border-radius: max(2px, var(--csss-control-radius)) !important;
+  background: color-mix(in oklab, var(--csss-accent) 14%, var(--csss-surface-strong)) !important;
+  box-shadow:
+    inset 0 5px 0 var(--csss-accent),
+    0 var(--csss-landing-shadow-y) var(--csss-landing-shadow-blur)
+      color-mix(in oklab, var(--csss-shadow) 82%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-card="glass"] .csss-open-landing-card {
+  border-color: color-mix(in oklab, white 30%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-surface-strong) 38%, transparent) !important;
+  backdrop-filter: blur(16px) saturate(1.4);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-rhythm="staggered"] :is(
+  .csss-open-landing-card-2,
+  .csss-open-landing-card-4,
+  .csss-open-landing-card-6
+) {
+  --csss-landing-offset: var(--csss-landing-card-lift);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-rhythm="cascade"] .csss-open-landing-card-1 {
+  --csss-landing-offset: -8px;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-rhythm="cascade"] .csss-open-landing-card-2 {
+  --csss-landing-offset: 0px;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-rhythm="cascade"] .csss-open-landing-card-3 {
+  --csss-landing-offset: 8px;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-landing-rhythm="cascade"] .csss-open-landing-card-4 {
+  --csss-landing-offset: 16px;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card {
+  transform: translateY(var(--csss-landing-offset)) rotate(var(--csss-flair-tilt, 0deg));
+}
+
+html.csss-themed[data-csss-style="open"] :is(
+  .csss-open-landing-card-2,
+  .csss-open-landing-card-4,
+  .csss-open-landing-card-6
+) {
+  transform: translateY(var(--csss-landing-offset)) rotate(calc(var(--csss-flair-tilt, 0deg) * -1));
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card:enabled:hover {
+  z-index: 3;
+  border-color: color-mix(in oklab, var(--csss-accent) 72%, var(--csss-border)) !important;
+  background-color: color-mix(in oklab, var(--csss-accent-soft) 54%, var(--csss-surface-strong)) !important;
+  box-shadow:
+    inset 0 4px 0 var(--csss-accent),
+    0 calc(var(--csss-landing-shadow-y) + 6px)
+      calc(var(--csss-landing-shadow-blur) + 12px)
+      color-mix(in oklab, var(--csss-shadow) 88%, transparent) !important;
+  transform:
+    translateY(calc(var(--csss-landing-offset) - var(--csss-landing-hover-lift)))
+    scale(1.018);
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-card:enabled:active {
+  transform:
+    translateY(calc(var(--csss-landing-offset) - 2px))
+    scale(var(--csss-control-press-scale));
+}
+
+/*
+ * Stagecraft v3 turns Crazy designs into cross-region art directions instead
+ * of larger values on the ordinary Open template. The owned scene is inert,
+ * contains text only, and always stays behind Codex's interactive content.
+ */
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene {
+  position: absolute !important;
+  inset: calc(var(--csss-stage-overscan) * -1) !important;
+  z-index: 0 !important;
+  overflow: hidden;
+  pointer-events: none !important;
+  user-select: none;
+  color: var(--csss-accent);
+  opacity: 1;
+  contain: paint;
+  animation: csss-stage-reveal 720ms var(--csss-design-easing) both;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene > span {
+  position: absolute;
+  display: block;
+  max-width: 92%;
+  overflow: hidden;
+  color: var(--csss-accent);
+  line-height: 0.84;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-title {
+  top: 7%;
+  left: calc(var(--csss-stage-shift) * -1);
+  font-size: clamp(72px, 13vw, var(--csss-stage-title-size));
+  font-weight: 900;
+  letter-spacing: -0.085em;
+  opacity: var(--csss-stage-word-opacity);
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-keyword {
+  font-size: clamp(10px, 1.15vw, 15px);
+  font-weight: 780;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: calc(var(--csss-stage-word-opacity) + 0.25);
+}
+
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-keyword-1 { top: 5%; right: 4%; }
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-keyword-2 { top: 48%; left: 1%; }
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-keyword-3 { right: 3%; bottom: 17%; }
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-keyword-4 { bottom: 3%; left: 42%; }
+
+html.csss-themed[data-csss-style="open"][data-csss-type-voice="editorial"] :is(
+  .csss-open-landing-heading,
+  .csss-open-landing-scene
+) {
+  font-family: "Iowan Old Style", Baskerville, "Times New Roman", serif !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-type-voice="condensed"] :is(
+  .csss-open-landing-heading,
+  .csss-open-landing-scene
+) {
+  font-family: "Avenir Next Condensed", "Arial Narrow", sans-serif !important;
+  font-stretch: condensed;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-type-voice="industrial"] :is(
+  .csss-open-landing-heading,
+  .csss-open-landing-scene
+) {
+  font-family: "DIN Alternate", "Helvetica Neue", sans-serif !important;
+  letter-spacing: -0.025em !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-type-voice="soft"] :is(
+  .csss-open-landing-heading,
+  .csss-open-landing-scene
+) {
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif !important;
+}
+
+/* Keyword typography can become a margin system, cover title, ticker, or
+ * numbered index without introducing arbitrary HTML or remote typefaces. */
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="labels"] .csss-scene-title {
+  top: auto;
+  left: 2%;
+  bottom: 1%;
+  font-size: clamp(16px, 2vw, 26px);
+  letter-spacing: 0.16em;
+  opacity: calc(var(--csss-stage-word-opacity) + 0.28);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="oversized"] .csss-scene-title {
+  top: 10%;
+  left: calc(var(--csss-stage-shift) * -1);
+  max-width: 118%;
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in oklab, var(--csss-accent) 72%, transparent);
+  opacity: calc(var(--csss-stage-word-opacity) + 0.09);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="ticker"] .csss-open-landing-scene {
+  inset-inline: calc(var(--csss-stage-overscan) * -1) !important;
+  top: auto !important;
+  bottom: calc(var(--csss-stage-overscan) * -0.5) !important;
+  height: 44px;
+  border-block: 1px solid color-mix(in oklab, var(--csss-accent) 54%, transparent);
+  background: color-mix(in oklab, var(--csss-surface-strong) 82%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="ticker"] .csss-open-landing-scene > span {
+  position: static;
+  display: inline-block;
+  width: auto;
+  margin: 0 2.2rem 0 0;
+  font-size: 12px;
+  line-height: 42px;
+  letter-spacing: 0.14em;
+  opacity: 0.82;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="ticker"] .csss-scene-title {
+  margin-left: 16px;
+  font-weight: 900;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-open-landing-scene {
+  counter-reset: csss-stage-index;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-scene-title {
+  top: 2%;
+  left: 2%;
+  font-size: clamp(19px, 2.2vw, 30px);
+  letter-spacing: -0.04em;
+  opacity: 0.68;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-scene-keyword {
+  counter-increment: csss-stage-index;
+  right: 2%;
+  left: auto;
+  width: 27%;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in oklab, var(--csss-accent) 52%, transparent);
+  opacity: 0.66;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-scene-keyword::before {
+  content: "0" counter(csss-stage-index) "  ";
+  color: var(--csss-accent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-scene-keyword-1 { top: 15%; }
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-scene-keyword-2 { top: 29%; }
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-scene-keyword-3 { top: 43%; }
+html.csss-themed[data-csss-style="open"][data-csss-keyword-mode="index"] .csss-scene-keyword-4 { top: 57%; }
+
+/* Axis is a compositional direction, not an animation gimmick. */
+html.csss-themed[data-csss-style="open"][data-csss-stage-axis="diagonal"] .csss-scene-title {
+  transform: rotate(-7deg);
+  transform-origin: left center;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-axis="vertical"] .csss-scene-title {
+  top: 0;
+  right: -0.1em;
+  left: auto;
+  writing-mode: vertical-rl;
+  font-size: clamp(56px, 8vw, 104px);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-axis="radial"] .csss-scene-title {
+  top: 50%;
+  left: 50%;
+  width: max-content;
+  transform: translate(-50%, -50%) rotate(-10deg);
+  text-align: center;
+}
+
+/* Scene frames deliberately avoid the usual rounded glass panel language. */
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene::before,
+html.csss-themed[data-csss-style="open"] .csss-open-landing-scene::after {
+  content: none;
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="crop"] .csss-open-landing-scene::before {
+  content: "";
+  inset: 8px;
+  background:
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 0 0 / 38px 2px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 0 0 / 2px 38px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 100% 0 / 38px 2px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 100% 0 / 2px 38px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 0 100% / 38px 2px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 0 100% / 2px 38px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 100% 100% / 38px 2px no-repeat,
+    linear-gradient(var(--csss-accent), var(--csss-accent)) 100% 100% / 2px 38px no-repeat;
+  opacity: 0.76;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="film"] .csss-open-landing-scene::before,
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="film"] .csss-open-landing-scene::after {
+  content: "";
+  right: 0;
+  left: 0;
+  height: 13px;
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--csss-accent) 70%, transparent) 0 15px,
+    transparent 15px 25px
+  );
+  opacity: 0.62;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="film"] .csss-open-landing-scene::before { top: 4px; }
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="film"] .csss-open-landing-scene::after { bottom: 4px; }
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="torn"] .csss-open-landing-scene::before,
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="torn"] .csss-open-landing-scene::after {
+  content: "";
+  right: -2%;
+  left: -2%;
+  height: 38px;
+  background: color-mix(in oklab, var(--csss-accent) 72%, transparent);
+  clip-path: polygon(0 28%, 5% 48%, 11% 21%, 18% 59%, 26% 31%, 35% 64%, 44% 23%, 53% 57%, 62% 27%, 70% 66%, 79% 20%, 88% 55%, 94% 29%, 100% 52%, 100% 72%, 0 72%);
+  opacity: 0.36;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="torn"] .csss-open-landing-scene::before { top: 0; }
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="torn"] .csss-open-landing-scene::after { bottom: 0; transform: rotate(180deg); }
+
+html.csss-themed[data-csss-style="open"][data-csss-stage-frame="double"] .csss-open-landing-scene::before {
+  content: "";
+  inset: 7px;
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 76%, transparent);
+  box-shadow: inset 0 0 0 7px color-mix(in oklab, var(--csss-accent) 16%, transparent);
+}
+
+/* Editorial collision: the home reads like a magazine cover and the sidebar
+ * behaves like a contents page rather than a stack of identical pills. */
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-stage {
+  display: grid !important;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: end;
+  column-gap: clamp(18px, 4vw, 68px);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-hero {
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+  min-height: 330px;
+  padding: 0 0 36px var(--csss-stage-shift);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-heading {
+  max-width: 8ch;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  font-size: clamp(50px, 7vw, 94px) !important;
+  line-height: 0.86 !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-grid {
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  align-items: stretch;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-card-1 { grid-column: span 7; }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-card-2 { grid-column: span 5; }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-card-3 { grid-column: span 4; }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-card-4 { grid-column: span 8; }
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] .csss-open-landing-card {
+  border-radius: 0 !important;
+  box-shadow: inset 0 3px 0 var(--csss-accent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] aside.app-shell-left-panel .csss-open-nav-row:nth-child(2n) { margin-left: 10px; width: calc(100% - 10px); }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="editorial-collision"] aside.app-shell-left-panel .csss-open-nav-row:nth-child(3n) { margin-left: 18px; width: calc(100% - 18px); }
+
+/* Cinematic portal: the native Codex mark becomes a spatial anchor while the
+ * heading and cards occupy foreground planes. */
+html.csss-themed[data-csss-style="open"][data-csss-archetype="cinematic-portal"] .csss-open-landing-stage {
+  min-height: 520px;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="cinematic-portal"] .csss-open-landing-hero {
+  min-height: 300px;
+  justify-content: center !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="cinematic-portal"] .csss-open-landing-mark {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 210px !important;
+  height: 210px !important;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 74%, transparent) !important;
+  border-radius: 50% !important;
+  background: color-mix(in oklab, var(--csss-surface) 46%, transparent) !important;
+  color: var(--csss-accent) !important;
+  opacity: calc(var(--csss-stage-word-opacity) + 0.28);
+  transform: translate(-50%, -50%) scale(var(--csss-stage-scale)) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="cinematic-portal"] .csss-open-landing-heading {
+  z-index: 2;
+  max-width: 14ch;
+  font-size: clamp(42px, 6vw, 78px) !important;
+  text-align: center !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="cinematic-portal"] .csss-open-landing-suggestions {
+  position: relative;
+  z-index: 4;
+  margin-top: -38px;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="cinematic-portal"] .csss-open-landing-card {
+  min-height: 98px !important;
+  border-width: 0 0 2px 0 !important;
+  border-radius: 0 !important;
+  background: color-mix(in oklab, var(--csss-surface-strong) 88%, transparent) !important;
+  box-shadow: none !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="cinematic-portal"] header.app-header-tint {
+  border-bottom: 1px solid color-mix(in oklab, var(--csss-accent) 54%, var(--csss-border));
+}
+
+/* Kinetic totem: a vertical headline and stepped navigation create a single
+ * upward motion without replacing any semantic icon. */
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] .csss-open-landing-stage {
+  display: grid !important;
+  grid-template-columns: minmax(150px, 0.72fr) minmax(0, 2.1fr);
+  gap: clamp(20px, 4vw, 56px);
+  align-items: stretch;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] .csss-open-landing-hero {
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  min-height: 410px;
+  border-right: 2px solid color-mix(in oklab, var(--csss-accent) 62%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] .csss-open-landing-heading {
+  width: auto;
+  max-height: 390px;
+  justify-content: flex-start !important;
+  writing-mode: vertical-rl;
+  text-align: left !important;
+  font-size: clamp(34px, 4.4vw, 62px) !important;
+  line-height: 0.94 !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] .csss-open-landing-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] .csss-open-landing-card {
+  border-radius: 0 !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] aside.app-shell-left-panel .csss-open-nav-row:nth-child(2n) { margin-left: 7px; width: calc(100% - 7px); }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] aside.app-shell-left-panel .csss-open-nav-row:nth-child(3n) { margin-left: 14px; width: calc(100% - 14px); }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="kinetic-totem"] aside.app-shell-left-panel .csss-open-nav-row:nth-child(4n) { margin-left: 21px; width: calc(100% - 21px); }
+
+/* Analog broadcast: hard rules, status rhythm and film mechanics replace the
+ * generic rounded-card dashboard aesthetic. */
+html.csss-themed[data-csss-style="open"][data-csss-archetype="analog-broadcast"] header.app-header-tint {
+  border-block: 2px solid color-mix(in oklab, var(--csss-accent) 62%, var(--csss-border));
+  box-shadow: 0 5px 0 color-mix(in oklab, var(--csss-accent) 18%, transparent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="analog-broadcast"] .csss-open-landing-stage {
+  border-inline: 1px solid color-mix(in oklab, var(--csss-accent) 48%, transparent);
+  padding-inline: clamp(16px, 3vw, 38px);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="analog-broadcast"] .csss-open-landing-heading {
+  justify-content: flex-start !important;
+  max-width: 20ch;
+  text-align: left !important;
+  text-transform: uppercase;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="analog-broadcast"] .csss-open-landing-grid {
+  gap: 0 !important;
+  border-top: 2px solid var(--csss-accent);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="analog-broadcast"] .csss-open-landing-card {
+  min-height: 110px !important;
+  border-width: 0 1px 1px 0 !important;
+  border-radius: 0 !important;
+  background: color-mix(in oklab, var(--csss-surface-strong) 91%, transparent) !important;
+  box-shadow: none !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="analog-broadcast"] aside.app-shell-left-panel .csss-open-nav-row {
+  border-radius: 0 !important;
+  border-bottom-color: color-mix(in oklab, var(--csss-accent) 28%, var(--csss-border)) !important;
+  letter-spacing: 0.06em;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="analog-broadcast"] aside.app-shell-left-panel .csss-open-nav-icon {
+  border-radius: 0 !important;
+}
+
+/* Surreal collage: controlled overlap and opposing angles make the interface
+ * feel assembled from image fragments instead of uniformly styled widgets. */
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-stage {
+  padding-block: 44px 38px;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-hero {
+  width: 72%;
+  margin-left: 8%;
+  align-items: flex-start !important;
+  transform: rotate(-3.5deg);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-heading {
+  justify-content: flex-start !important;
+  max-width: 13ch;
+  text-align: left !important;
+  font-size: clamp(44px, 6vw, 82px) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-grid {
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  gap: clamp(8px, 1vw, 14px) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-card-1 { grid-column: 1 / span 5; transform: translateY(18px) rotate(-2deg); }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-card-2 { grid-column: 5 / span 4; transform: translateY(-14px) rotate(2.5deg); }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-card-3 { grid-column: 9 / span 4; transform: translateY(23px) rotate(-1deg); }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-card-4 { grid-column: 3 / span 7; transform: translateY(-5px) rotate(1.2deg); }
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] .csss-open-landing-card {
+  border: 2px solid color-mix(in oklab, var(--csss-accent) 65%, var(--csss-border)) !important;
+  border-radius: 2px !important;
+  box-shadow: 8px 9px 0 color-mix(in oklab, var(--csss-accent) 24%, transparent) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] aside.app-shell-left-panel .csss-open-nav-row:nth-child(2n) { margin-left: 9px; width: calc(100% - 9px); transform: rotate(0.45deg); }
+html.csss-themed[data-csss-style="open"][data-csss-archetype="surreal-collage"] aside.app-shell-left-panel .csss-open-nav-row:nth-child(3n) { margin-left: 2px; width: calc(100% - 2px); transform: rotate(-0.45deg); }
+
+/* Architectural grid: the full home becomes a ruled plan with explicit
+ * hierarchy and no floating-card ambiguity. */
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] .csss-open-landing-stage {
+  display: grid !important;
+  grid-template-columns: minmax(210px, 5fr) minmax(0, 7fr);
+  gap: 0;
+  border: 1px solid color-mix(in oklab, var(--csss-accent) 55%, var(--csss-border));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] .csss-open-landing-hero {
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  min-height: 390px;
+  padding: clamp(22px, 4vw, 54px) !important;
+  border-right: 1px solid color-mix(in oklab, var(--csss-accent) 58%, var(--csss-border));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] .csss-open-landing-heading {
+  justify-content: flex-start !important;
+  max-width: 9ch;
+  text-align: left !important;
+  font-size: clamp(42px, 5vw, 72px) !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] .csss-open-landing-suggestions {
+  padding: clamp(16px, 2vw, 28px);
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] .csss-open-landing-grid {
+  gap: 0 !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  border-top: 1px solid color-mix(in oklab, var(--csss-accent) 58%, var(--csss-border));
+  border-left: 1px solid color-mix(in oklab, var(--csss-accent) 58%, var(--csss-border));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] .csss-open-landing-card {
+  min-height: 154px !important;
+  border-width: 0 1px 1px 0 !important;
+  border-radius: 0 !important;
+  background: color-mix(in oklab, var(--csss-surface-strong) 88%, transparent) !important;
+  box-shadow: none !important;
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] header.app-header-tint {
+  border-bottom: 4px solid color-mix(in oklab, var(--csss-accent) 68%, var(--csss-border));
+}
+
+html.csss-themed[data-csss-style="open"][data-csss-archetype="architectural-grid"] aside.app-shell-left-panel .csss-open-nav-row {
+  border-radius: 0 !important;
+  border-width: 0 0 1px 0 !important;
+  border-bottom-color: color-mix(in oklab, var(--csss-accent) 30%, var(--csss-border)) !important;
+}
+
+@keyframes csss-stage-reveal {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+@media (max-width: 980px) {
+  html.csss-themed[data-csss-style="open"][data-csss-landing-layout="editorial"] .csss-open-landing-hero {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 18px !important;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-landing-layout="editorial"] .csss-open-landing-heading {
+    max-width: 18ch;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-landing-layout="editorial"] .csss-open-landing-mark {
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+    transform: none;
+  }
+
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-card {
+    --csss-landing-offset: 0px !important;
+    min-height: 112px !important;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-archetype]:not([data-csss-archetype="none"]) .csss-open-landing-stage {
+    display: block !important;
+    min-height: 0;
+    padding: 22px 0 34px;
+    border-inline: 0;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-archetype]:not([data-csss-archetype="none"]) .csss-open-landing-hero {
+    width: 100%;
+    min-height: 210px;
+    margin: 0;
+    padding: 22px 16px !important;
+    border-right: 0;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: none;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-archetype]:not([data-csss-archetype="none"]) .csss-open-landing-heading {
+    width: 100%;
+    max-width: 16ch;
+    max-height: none;
+    justify-content: center !important;
+    writing-mode: horizontal-tb;
+    text-align: center !important;
+    font-size: clamp(34px, 8vw, 58px) !important;
+    line-height: 0.96 !important;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-archetype]:not([data-csss-archetype="none"]) .csss-open-landing-mark {
+    position: relative;
+    inset: auto;
+    width: 58px !important;
+    height: 58px !important;
+    flex-basis: 58px;
+    opacity: 0.9;
+    transform: none !important;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-archetype]:not([data-csss-archetype="none"]) .csss-open-landing-suggestions {
+    margin-top: 0;
+    padding: 12px;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-archetype]:not([data-csss-archetype="none"]) .csss-open-landing-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  html.csss-themed[data-csss-style="open"][data-csss-archetype]:not([data-csss-archetype="none"]) .csss-open-landing-card {
+    grid-column: auto !important;
+    min-height: 112px !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-scene {
+    inset: -8px !important;
+  }
+
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-title {
+    top: 4%;
+    right: auto;
+    left: -8px;
+    max-width: 105%;
+    font-size: clamp(46px, 14vw, 84px);
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-keyword-3,
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-scene .csss-scene-keyword-4 {
+    display: none;
+  }
+
+  html.csss-themed[data-csss-style="open"] aside.app-shell-left-panel .csss-open-nav-row {
+    width: auto !important;
+    margin-left: 0 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-card,
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-card:enabled:hover,
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-card:enabled:active {
+    transform: none;
+    transition: none;
+  }
+
+  html.csss-themed[data-csss-style="open"] .csss-open-landing-scene {
+    animation: none;
+  }
+}
+
+#csss-root,
+#csss-root * {
+  box-sizing: border-box;
+}
+
+#csss-root {
+  --csss-ui-bg: var(--color-background-elevated-primary-opaque, #1d1e1c);
+  --csss-ui-panel: var(--color-background-control-opaque, #262724);
+  --csss-ui-raised: var(--color-background-accent, #30312d);
+  --csss-ui-text: var(--color-text-foreground, #f1f0e9);
+  --csss-ui-muted: var(--color-text-foreground-tertiary, #a4a49c);
+  --csss-ui-border: var(--color-border, rgba(241, 240, 233, 0.13));
+  --csss-ui-accent: var(--color-text-accent, var(--csss-accent));
+  --csss-ui-accent-ink: var(--color-text-on-accent, var(--csss-accent-ink));
+  --csss-ui-danger: #e6a39a;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  color: var(--csss-ui-text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Keep the manager on the active skin palette while Codex transiently swaps
+   its own light/dark variables during ChatGPT/Codex workspace changes. */
+html.csss-themed #csss-root {
+  --csss-ui-bg: var(--csss-elevated);
+  --csss-ui-panel: var(--csss-input);
+  --csss-ui-raised: var(--csss-accent-soft);
+  --csss-ui-text: var(--csss-text);
+  --csss-ui-muted: var(--csss-muted);
+  --csss-ui-border: var(--csss-border);
+  --csss-ui-accent: var(--csss-accent);
+  --csss-ui-accent-ink: var(--csss-accent-ink);
+}
+
+#csss-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  width: min(392px, calc(100vw - 24px));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  border: 1px solid var(--csss-ui-border);
+  border-radius: 18px;
+  background: var(--csss-ui-bg);
+  box-shadow: 0 28px 90px var(--csss-shadow, rgba(5, 6, 5, 0.38));
+  pointer-events: auto;
+  transform: translateX(calc(100% + 32px));
+  opacity: 0;
+  transition:
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms linear;
+}
+
+#csss-root[data-open="true"] #csss-panel {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.csss-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--csss-ui-border);
+}
+
+.csss-kicker {
+  margin: 0 0 3px;
+  color: var(--csss-ui-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.csss-title {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.csss-icon-button,
+.csss-button,
+.csss-segment button,
+.csss-theme-select,
+.csss-theme-delete {
+  min-height: 44px;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.csss-icon-button {
+  width: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.csss-icon-button:hover {
+  background: var(--csss-ui-panel);
+}
+
+#csss-root :focus-visible {
+  outline: 2px solid var(--csss-ui-accent);
+  outline-offset: 2px;
+}
+
+.csss-scroll {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--csss-ui-raised) transparent;
+}
+
+.csss-section {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border-bottom: 1px solid var(--csss-ui-border);
+}
+
+.csss-section:last-child {
+  border-bottom: 0;
+}
+
+.csss-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.csss-section h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.csss-hint,
+.csss-value,
+.csss-status {
+  color: var(--csss-ui-muted);
+  font-size: 12px;
+}
+
+.csss-profile {
+  display: block;
+  margin-top: 3px;
+  color: var(--csss-ui-accent);
+  font-size: 11px;
+}
+
+.csss-import {
+  position: relative;
+  min-height: 164px;
+  display: grid;
+  align-content: end;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--csss-ui-panel);
+  isolation: isolate;
+}
+
+.csss-import::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--csss-preview-image, linear-gradient(135deg, #30312d, #1d1e1c));
+  background-position: center;
+  background-size: cover;
+}
+
+.csss-import::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, transparent 20%, rgba(12, 13, 12, 0.82));
+}
+
+.csss-import-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 14px;
+  padding: 16px;
+}
+
+.csss-import-actions {
+  min-width: 112px;
+  display: grid;
+  gap: 8px;
+}
+
+.csss-boldness {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.csss-import strong,
+.csss-import span {
+  display: block;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.72);
+}
+
+.csss-import span {
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+}
+
+.csss-button {
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--csss-ui-raised);
+  white-space: nowrap;
+}
+
+.csss-button:hover {
+  background: color-mix(in oklab, var(--csss-ui-raised) 80%, var(--csss-ui-accent));
+}
+
+.csss-button[data-action="choose-image"] {
+  border: 1px solid color-mix(in oklab, var(--csss-ui-text) 84%, var(--csss-ui-bg));
+  background: var(--csss-ui-text);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.22);
+  color: var(--csss-ui-bg);
+  font-weight: 650;
+  opacity: 1;
+}
+
+.csss-button[data-action="choose-image"]:hover {
+  background: color-mix(in oklab, var(--csss-ui-text) 86%, var(--csss-ui-accent));
+}
+
+.csss-button[data-kind="primary"] {
+  background: var(--csss-ui-accent);
+  color: var(--csss-ui-accent-ink);
+  font-weight: 650;
+}
+
+.csss-button[data-kind="danger"] {
+  color: var(--csss-ui-danger);
+  background: color-mix(in oklab, var(--csss-ui-danger) 13%, transparent);
+}
+
+.csss-button[disabled] {
+  opacity: 0.46;
+  cursor: not-allowed;
+}
+
+.csss-button[data-loading="true"] {
+  cursor: progress;
+}
+
+.csss-themes {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 88px;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.csss-theme-item {
+  position: relative;
+  min-height: 104px;
+}
+
+.csss-theme-select {
+  width: 100%;
+  min-height: 104px;
+  display: grid;
+  grid-template-rows: 72px auto;
+  gap: 7px;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.csss-theme-thumb {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--csss-ui-border);
+  border-radius: 9px;
+  background-position: center;
+  background-size: cover;
+}
+
+.csss-theme-item[aria-current="true"] .csss-theme-thumb {
+  border-color: var(--csss-ui-accent);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--csss-ui-accent) 24%, transparent);
+}
+
+.csss-media-badge {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  min-width: 30px;
+  padding: 2px 5px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(8, 9, 9, 0.78);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.csss-theme-name {
+  overflow: hidden;
+  color: var(--csss-ui-muted);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.csss-theme-item[aria-current="true"] .csss-theme-name {
+  color: var(--csss-ui-text);
+}
+
+.csss-theme-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  width: 27px;
+  min-width: 27px;
+  min-height: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 7px;
+  background: rgba(22, 20, 17, 0.68);
+  color: #fffaf2;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+  opacity: 0.82;
+  transition:
+    opacity 140ms ease-out,
+    background-color 140ms ease-out,
+    width 140ms ease-out;
+}
+
+.csss-theme-delete svg {
+  width: 15px;
+  height: 15px;
+}
+
+.csss-theme-item:hover .csss-theme-delete,
+.csss-theme-delete:focus-visible,
+.csss-theme-delete[data-armed="true"] {
+  opacity: 1;
+}
+
+.csss-theme-delete[data-armed="true"] {
+  width: 42px;
+  color: #fff;
+  background: var(--csss-ui-danger);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.csss-empty {
+  grid-column: 1 / -1;
+  padding: 4px 0;
+  color: var(--csss-ui-muted);
+  font-size: 12px;
+}
+
+.csss-swatches {
+  display: flex;
+  gap: 8px;
+}
+
+.csss-swatch {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--csss-ui-border);
+  border-radius: 50%;
+  background: var(--swatch);
+}
+
+.csss-segment {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 3px;
+  border: 1px solid var(--csss-ui-border);
+  border-radius: 10px;
+  background: var(--csss-ui-panel);
+}
+
+.csss-style-choice {
+  display: grid;
+  gap: 8px;
+}
+
+.csss-skill-design {
+  display: grid;
+  gap: 6px;
+  padding: 13px 14px;
+  border: 1px solid color-mix(in oklab, var(--csss-ui-accent) 24%, var(--csss-ui-border));
+  border-radius: 10px;
+  background:
+    linear-gradient(110deg, color-mix(in oklab, var(--csss-ui-accent) 9%, transparent), transparent 62%),
+    var(--csss-ui-panel);
+}
+
+.csss-skill-design-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.csss-design-badge {
+  color: var(--csss-ui-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.csss-skill-design strong {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.csss-skill-design p {
+  margin: 0;
+  color: var(--csss-ui-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.csss-text-action {
+  min-height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--csss-ui-muted);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.csss-text-action:hover {
+  color: var(--csss-ui-text);
+}
+
+.csss-field-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--csss-ui-muted);
+  font-size: 12px;
+}
+
+.csss-field-label small {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.csss-segment button {
+  min-height: 38px;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--csss-ui-muted);
+}
+
+.csss-segment button[aria-pressed="true"] {
+  background: var(--csss-ui-raised);
+  color: var(--csss-ui-text);
+}
+
+.csss-controls {
+  display: grid;
+  gap: 16px;
+}
+
+.csss-field {
+  display: grid;
+  gap: 7px;
+}
+
+.csss-field label {
+  color: var(--csss-ui-muted);
+  font-size: 12px;
+}
+
+.csss-text-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--csss-ui-border);
+  border-radius: 9px;
+  background: var(--csss-ui-panel);
+  color: var(--csss-ui-text);
+  font: inherit;
+}
+
+.csss-text-input:hover {
+  border-color: color-mix(in oklab, var(--csss-ui-accent) 38%, var(--csss-ui-border));
+}
+
+.csss-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.csss-control label {
+  font-size: 12px;
+}
+
+.csss-control input[type="range"] {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: var(--csss-ui-accent);
+}
+
+.csss-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.csss-restore-confirm {
+  display: none;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid color-mix(in oklab, var(--csss-ui-danger) 32%, transparent);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--csss-ui-danger) 8%, transparent);
+}
+
+.csss-restore-confirm[data-visible="true"] {
+  display: grid;
+}
+
+.csss-restore-confirm p {
+  margin: 0;
+  color: var(--csss-ui-text);
+  font-size: 12px;
+}
+
+.csss-foot {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--csss-ui-border);
+}
+
+.csss-dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--csss-ui-accent);
+}
+
+.csss-foot-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 620px) {
+  #csss-panel {
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: calc(100vw - 16px);
+  }
+
+  #csss-launcher {
+    left: auto;
+    right: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #csss-art-layer > .csss-art-video {
+    display: none !important;
+  }
+
+  html.csss-themed[data-csss-media="video"] #csss-art-layer > .csss-art-canvas {
+    opacity: var(--csss-art-opacity) !important;
+  }
+
+  #csss-panel,
+  #csss-launcher {
+    transition-duration: 0.01ms !important;
+  }
+}

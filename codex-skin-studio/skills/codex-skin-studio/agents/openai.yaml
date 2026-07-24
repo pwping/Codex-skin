@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Skin Studio"
+  short_description: "Generate and manage image-driven Codex skins"
+  default_prompt: "Use $codex-skin-studio to verify this Mac and safely start the in-app Codex skin manager; ask before restarting an active Codex process."

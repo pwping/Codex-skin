@@ -1,0 +1,6 @@
+.DS_Store
+__MACOSX/
+dist/
+*.log
+*.tmp
+codex-skin-studio-workspace/

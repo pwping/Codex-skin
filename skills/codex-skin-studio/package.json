@@ -1,0 +1,9 @@
+﻿{
+  "name": "codex-skin-studio-windows",
+  "version": "0.16.7",
+  "private": true,
+  "description": "Codex Skin Studio - Windows adaptation",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
